@@ -5,9 +5,12 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using EA.Festival.ApplicationCore;
+using EA.Festival.ApplicationCore.DTOs;
+using EA.Festival.ApplicationCore.Exceptions;
 using EA.Festival.Domain.Interfaces;
 using EA.Festival.Domain.Models;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 
 namespace EA.Festival.Infrastructure.Services
 {
@@ -24,7 +27,37 @@ namespace EA.Festival.Infrastructure.Services
         public FestivalDataService(IOptions<AppConfig> appConfig)
         {
             _appConfig = appConfig.Value;
+            SetUpHttpClient();
         }
+ 
+        public async Task<IEnumerable<MusicFestivalDto>> GetMusicFestivals()
+        {
+            var request = new Uri(_appConfig.FestivalDataServiceApiGetFestivalEndpointUri, UriKind.Relative);
+
+            try
+            {
+                HttpResponseMessage response = await _httpClient.GetAsync(request);
+                var responseContent = await response.Content.ReadAsStringAsync();
+
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    IEnumerable<MusicFestivalDto> result = JsonConvert.DeserializeObject<IEnumerable<MusicFestivalDto>>(responseContent);
+                    return result;
+                }
+                else
+                {
+                    throw new FestivalApplicationException(response, responseContent);
+                }
+            }
+            catch (Exception ex)
+            {
+                // TODO: log error
+                throw;
+            }
+        }
+
+        #region Private methods
+
         private void SetUpHttpClient()
         {
             _httpClient.DefaultRequestHeaders.Clear();
@@ -32,9 +65,6 @@ namespace EA.Festival.Infrastructure.Services
             _httpClient.BaseAddress = new Uri(_appConfig.FestivalDataServiceApiBaseAddress);
         }
 
-        public async Task<IEnumerable<MusicFestival>> GetMusicFestivals()
-        {
-            throw new NotImplementedException();
-        }
+        #endregion
     }
 }
