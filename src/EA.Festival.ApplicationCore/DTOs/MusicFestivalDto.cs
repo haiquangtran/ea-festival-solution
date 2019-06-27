@@ -8,6 +8,6 @@ namespace EA.Festival.ApplicationCore.DTOs
     {
         public string Name { get; set; }
 
-        public IEnumerable<BandDto> Bands { get; set; }
+        public IEnumerable<MusicBandDto> Bands { get; set; }
     }
 }

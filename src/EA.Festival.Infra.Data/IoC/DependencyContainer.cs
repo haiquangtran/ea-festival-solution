@@ -11,7 +11,7 @@ namespace EA.Festival.Infrastructure.IoC
         public static void RegisterServices(IServiceCollection services)
         {
             // Application Core layer
-            services.AddScoped<IFestivalDataService, FestivalDataService>();
+            services.AddScoped<IMusicFestivalDataService, MusicFestivalDataService>();
         }
 
         public static void RegisterMappingProfiles(IServiceCollection services)

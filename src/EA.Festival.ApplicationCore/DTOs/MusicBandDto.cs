@@ -1,6 +1,6 @@
 ﻿namespace EA.Festival.ApplicationCore.DTOs
 {
-    public class BandDto
+    public class MusicBandDto
     {
         public string Name { get; set; }
 

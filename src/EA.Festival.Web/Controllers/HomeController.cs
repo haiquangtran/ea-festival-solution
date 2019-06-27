@@ -6,16 +6,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using EA.Festival.Web.Models;
 using EA.Festival.Domain.Interfaces;
-using EA.Festival.Domain.Models;
 using EA.Festival.ApplicationCore.DTOs;
 
 namespace EA.Festival.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IFestivalDataService _festivalDataService;
+        private readonly IMusicFestivalDataService _festivalDataService;
 
-        public HomeController(IFestivalDataService festivalDataService)
+        public HomeController(IMusicFestivalDataService festivalDataService)
         {
             _festivalDataService = festivalDataService;
         }
