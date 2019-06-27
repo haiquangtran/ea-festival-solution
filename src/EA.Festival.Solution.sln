@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EA.Festival.Domain", "EA.Festival.Domain\EA.Festival.Domain.csproj", "{BB678C93-6CD5-41DF-8287-B254F6A5E801}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EA.Festival.Infra.Data", "EA.Festival.Infra.Data\EA.Festival.Infra.Data.csproj", "{B88640A5-32A6-4C52-8E04-75B7E2F930C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EA.Festival.Infrastructure", "EA.Festival.Infra.Data\EA.Festival.Infrastructure.csproj", "{B88640A5-32A6-4C52-8E04-75B7E2F930C6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EA.Festival.Web", "EA.Festival.Web\EA.Festival.Web.csproj", "{132338EC-A36A-40EA-832A-8359286AC01A}"
 EndProject

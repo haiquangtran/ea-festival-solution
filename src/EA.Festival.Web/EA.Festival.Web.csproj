@@ -11,4 +11,10 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <ProjectReference Include="..\EA.Festival.ApplicationCore\EA.Festival.ApplicationCore.csproj" />
+    <ProjectReference Include="..\EA.Festival.Infra.Data\EA.Festival.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
