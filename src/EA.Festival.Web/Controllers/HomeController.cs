@@ -7,14 +7,18 @@ using Microsoft.AspNetCore.Mvc;
 using EA.Festival.Web.Models;
 using EA.Festival.Domain.Interfaces;
 using EA.Festival.ApplicationCore.DTOs;
+using AutoMapper;
+using Microsoft.Extensions.Options;
+using EA.Festival.ApplicationCore;
 
 namespace EA.Festival.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        private readonly IMusicFestivalDataService _festivalDataService;
+        private readonly IMusicFestivalApiClient _festivalDataService;
 
-        public HomeController(IMusicFestivalDataService festivalDataService)
+        public HomeController(IMusicFestivalApiClient festivalDataService, 
+            IMapper mapper, IOptions<AppConfig> appSettings) : base(mapper, appSettings)
         {
             _festivalDataService = festivalDataService;
         }
@@ -22,8 +26,9 @@ namespace EA.Festival.Web.Controllers
         public async Task<IActionResult> Index()
         {
             IEnumerable<MusicFestivalDto> musicFestivals = await _festivalDataService.GetMusicFestivals();
+            IEnumerable<MusicFestivalViewModel> result = _mapper.Map<IEnumerable<MusicFestivalDto>, IEnumerable<MusicFestivalViewModel>>(musicFestivals);
 
-            return View();
+            return View(result);
         }
 
         public IActionResult Privacy()

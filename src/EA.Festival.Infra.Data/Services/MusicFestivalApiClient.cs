@@ -12,25 +12,20 @@ using Newtonsoft.Json;
 
 namespace EA.Festival.Infrastructure.Services
 {
-    public class MusicFestivalDataService : IMusicFestivalDataService
+    public class MusicFestivalApiClient : IMusicFestivalApiClient
     {
-        private static readonly HttpClient _httpClient;
+        private readonly HttpClient _httpClient;
         private readonly AppConfig _appConfig;
 
-        static MusicFestivalDataService()
+        public MusicFestivalApiClient(HttpClient httpClient, IOptions<AppConfig> appConfig)
         {
-            _httpClient = new HttpClient();
-        }
-
-        public MusicFestivalDataService(IOptions<AppConfig> appConfig)
-        {
+            _httpClient = httpClient;
             _appConfig = appConfig.Value;
-            SetUpHttpClient();
         }
  
         public async Task<IEnumerable<MusicFestivalDto>> GetMusicFestivals()
         {
-            var request = new Uri(_appConfig.FestivalDataServiceApiGetFestivalEndpointUri, UriKind.Relative);
+            var request = new Uri(_appConfig.MusicFestivalApiGetFestivalEndpointUri, UriKind.Relative);
 
             try
             {
@@ -54,15 +49,5 @@ namespace EA.Festival.Infrastructure.Services
             }
         }
 
-        #region Private methods
-
-        private void SetUpHttpClient()
-        {
-            _httpClient.DefaultRequestHeaders.Clear();
-            _httpClient.DefaultRequestHeaders.Add(HttpRequestHeader.ContentType.ToString(), "application/json");
-            _httpClient.BaseAddress = new Uri(_appConfig.FestivalDataServiceApiBaseAddress);
-        }
-
-        #endregion
     }
 }

@@ -1,9 +1,22 @@
-﻿@Model  
+﻿@model IEnumerable<MusicFestivalViewModel>
 @{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="text-center">
+    <h1 class="display-4">Music Festivals</h1>
+
+    <div>
+        @foreach (var musicFestival in Model)
+        {
+            <p>Music Festival Name: @musicFestival.Name</p>
+
+            @foreach (var musicBand in musicFestival.Bands)
+            {
+                <p>
+                    Music Band Name: @musicBand.Name
+                </p>
+            }
+        }
+    </div>
+</section>

@@ -6,7 +6,7 @@ using EA.Festival.ApplicationCore.DTOs;
 
 namespace EA.Festival.Domain.Interfaces
 {
-    public interface IMusicFestivalDataService
+    public interface IMusicFestivalApiClient
     {
         Task<IEnumerable<MusicFestivalDto>> GetMusicFestivals();
     }
