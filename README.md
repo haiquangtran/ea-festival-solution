@@ -48,5 +48,6 @@ At the top level, it displays the band record label, below that it lists out all
 
 ## Extensions
 - Logging needs to be added to the solution, this can be added by using a Global exception handler.
+- Adding unit tests
 - Adding collapsible tree structure or accordions to represent the hierarchy, enabling the user to see the information relevant to them.
 - Adding pagination if the API returns large amounts of entry etc.
