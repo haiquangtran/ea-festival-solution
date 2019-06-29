@@ -27,10 +27,18 @@ namespace EA.Festival.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            IEnumerable<MusicFestivalDto> musicFestivals = await _festivalDataService.GetMusicFestivals();
-            IEnumerable<RecordLabelViewModel> recordLabelViewModels = _mapper.MapToRecordLabelViewModel(musicFestivals);
+            try
+            {
+                IEnumerable<MusicFestivalDto> musicFestivals = await _festivalDataService.GetMusicFestivals();
+                IEnumerable<RecordLabelViewModel> recordLabelViewModels = _mapper.MapToRecordLabelViewModel(musicFestivals);
 
-            return View(recordLabelViewModels);
+                return View(recordLabelViewModels);
+            }
+            catch (Exception ex)
+            {
+                // TODO: Log error etc
+                return View();
+            }
         }
 
         public IActionResult Privacy()

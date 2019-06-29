@@ -37,7 +37,8 @@ namespace EA.Festival.Web.Services
                         Bands = recordLabelBands
                     };
                 })
-                .OrderBy(recordLabel => recordLabel.Name);
+                .OrderBy(recordLabel => string.IsNullOrEmpty(recordLabel.Name))
+                .ThenBy(recordLabel => recordLabel.Name);
 
             return recordLabels ?? Enumerable.Empty<RecordLabelViewModel>();
         }

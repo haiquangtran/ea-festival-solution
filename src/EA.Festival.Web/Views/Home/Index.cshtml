@@ -17,7 +17,14 @@
                 @foreach (var recordLabel in Model)
                 {
                 <li>
-                    <h3 class="text-primary">@(string.IsNullOrEmpty(recordLabel.Name) ? "No Record Label" : recordLabel.Name)</h3>
+                    @if (string.IsNullOrEmpty(recordLabel.Name))
+                    {
+                        <h3 class="text-danger">No Record Label</h3>
+                    }
+                    else
+                    {
+                        <h3 class="text-primary">@recordLabel.Name</h3>
+                    }
 
                     @if (recordLabel.Bands == null || recordLabel.Bands.Count() == 0)
                     {
@@ -25,9 +32,7 @@
                     }
                     else
                     {
-                        <span class="ml-3">
-                            <strong>Bands:</strong>
-                        </span>
+                        <span class="ml-3"><strong>Bands:</strong></span>
                         <ul>
                             @foreach (var musicBand in recordLabel.Bands)
                             {
