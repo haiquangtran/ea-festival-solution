@@ -8,5 +8,7 @@ namespace EA.Festival.Web.Models
     public class MusicBandViewModel
     {
         public string Name { get; set; }
+
+        public IEnumerable<MusicFestivalViewModel> AttendedMusicFestivals { get; set; }
     }
 }

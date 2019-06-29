@@ -7,5 +7,8 @@ namespace EA.Festival.Web.Models
 {
     public class RecordLabelViewModel
     {
+        public string Name { get; set; }
+
+        public IEnumerable<MusicBandViewModel> Bands { get; set; }
     }
 }

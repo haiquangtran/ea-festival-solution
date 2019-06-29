@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Net;
-using AutoMapper;
 using EA.Festival.ApplicationCore;
 using EA.Festival.Domain.Interfaces;
-using EA.Festival.Infrastructure.Services;
-using EA.Festival.Web.Models.Mappings;
+using EA.Festival.Infrastructure.ApiClients;
+using EA.Festival.Web.Services;
+using EA.Festival.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -32,7 +32,7 @@ namespace EA.Festival.Web
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             ConfigureDependencies(services);
@@ -70,9 +70,6 @@ namespace EA.Festival.Web
         {
             // Register services
             RegisterServices(services);
-           
-            // Register mapping profiles
-            RegisterMappingProfiles(services);
         }
 
         private void RegisterServices(IServiceCollection services)
@@ -83,20 +80,13 @@ namespace EA.Festival.Web
             services.AddSingleton(Configuration);
 
             // Setup services
+            services.AddScoped<IViewModelMappingService, ViewModelMappingService>();
             services.AddHttpClient<IMusicFestivalApiClient, MusicFestivalApiClient>(client =>
             {
-            client.DefaultRequestHeaders.Add(HttpRequestHeader.ContentType.ToString(), "application/json");
-            client.BaseAddress = new Uri(Configuration[Constants.AppSettingNames.MusicFestivalApiBaseAddress]);
+                client.DefaultRequestHeaders.Add(HttpRequestHeader.ContentType.ToString(), "application/json");
+                client.BaseAddress = new Uri(Configuration[Constants.AppSettingNames.MusicFestivalApiBaseAddress]);
                 client.Timeout = TimeSpan.FromSeconds(int.Parse(Configuration[Constants.AppSettingNames.ApiTimeoutSeconds]));
             });
-        }
-
-        private void RegisterMappingProfiles(IServiceCollection services)
-        {
-            // Setup Mapping profiles
-            Mapper.Initialize(config => config.AddProfile<MappingProfile>());
-
-            services.AddAutoMapper(typeof(MappingProfile));
         }
 
         #endregion

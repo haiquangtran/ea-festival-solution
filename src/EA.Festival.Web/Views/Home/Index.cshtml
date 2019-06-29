@@ -1,22 +1,64 @@
-﻿@model IEnumerable<MusicFestivalViewModel>
+﻿@model IEnumerable<RecordLabelViewModel>
 @{
     ViewData["Title"] = "Home Page";
 }
 
-<section class="text-center">
-    <h1 class="display-4">Music Festivals</h1>
+<section class="">
+    <h1 class="display-4 text-info">Music Record Labels</h1>
 
-    <div>
-        @foreach (var musicFestival in Model)
+    <div class="mt-3">
+        @if (Model == null || Model.Count() == 0)
         {
-            <p>Music Festival Name: @musicFestival.Name</p>
+            <p><strong>No music record labels found. Please try again by refreshing the page.</strong></p>
+        }
+        else
+        {
+            <ul class="ea-list-bullets-none">
+                @foreach (var recordLabel in Model)
+                {
+                <li>
+                    <h3 class="text-info">@(string.IsNullOrEmpty(recordLabel.Name) ? "No Record Label" : recordLabel.Name)</h3>
 
-            @foreach (var musicBand in musicFestival.Bands)
-            {
-                <p>
-                    Music Band Name: @musicBand.Name
-                </p>
-            }
+                    @if (recordLabel.Bands == null || recordLabel.Bands.Count() == 0)
+                    {
+                        <p class="ml-3"><strong>No bands under this record label.</strong></p>
+                    }
+                    else
+                    {
+                        <span class="ml-3">
+                            <strong>Bands:</strong>
+                        </span>
+                        <ul>
+                            @foreach (var musicBand in recordLabel.Bands)
+                            {
+                                <li>
+                                    <h5>@musicBand.Name</h5>
+                                    <p class="mb-0"></p>
+                                    @if (musicBand.AttendedMusicFestivals == null || musicBand.AttendedMusicFestivals.Count() == 0)
+                                    {
+                                        <p class="ml-3"><strong>No music festivals attended.</strong></p>
+                                    }
+                                    else
+                                    {
+                                        <span class="ml-3">
+                                            <strong>Festivals Attended:</strong>
+                                        </span>
+                                        <ul>
+                                            @foreach (var attendedFestival in musicBand.AttendedMusicFestivals)
+                                            {
+                                                <li>
+                                                    @attendedFestival.Name
+                                                </li>
+                                            }
+                                        </ul>
+                                    }
+                                </li>
+                            }
+                        </ul>
+                    }
+                </li>
+                }
+            </ul>
         }
     </div>
 </section>

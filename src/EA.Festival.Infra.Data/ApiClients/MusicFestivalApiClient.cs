@@ -10,7 +10,7 @@ using EA.Festival.Domain.Interfaces;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
-namespace EA.Festival.Infrastructure.Services
+namespace EA.Festival.Infrastructure.ApiClients
 {
     public class MusicFestivalApiClient : IMusicFestivalApiClient
     {

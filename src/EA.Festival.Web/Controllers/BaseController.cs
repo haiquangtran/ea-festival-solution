@@ -12,12 +12,10 @@ namespace EA.Festival.Web.Controllers
     [Produces("application/json")]
     public abstract class BaseController : Controller
     {
-        protected IMapper _mapper { get; private set; }
         protected AppConfig _appSettings { get; private set; }
 
-        public BaseController(IMapper mapper, IOptions<AppConfig> appSettings)
+        public BaseController(IOptions<AppConfig> appSettings)
         {
-            _mapper = mapper;
             _appSettings = appSettings.Value;
         }
     }
