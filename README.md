@@ -4,10 +4,6 @@ A simple web app that displays band record labels, bands, and music festivals fr
 
 At the top level, it displays the band record label, below that it lists out all bands under their management, and below that it displays which festivals they've attended, if any. All entries are sorted alphabetically with the exception of bands belonging to no record label.
 
-**Swagger Url:** https://localhost:{portnumber}/swagger/index.html
-
-**Note**: It uses EF Core In Memory database for convenience but ideally this should be only used for testing purposes. 
-
 ## Developer Requirements
 - .NET Core 2.2
 - Visual Studio or dotnet CLI
